@@ -1,11 +1,11 @@
 'use client'
 import { CSVLink } from 'react-csv';
 import { useEffect, useState } from "react";
-import { IItem } from '@/app/interfaces/Item.interface';
+import { ItemProps } from '@/app/interfaces/Item.interface';
 import getData from '@/app/api/endpoints/import/getItem';
 
 const ExportCSV = () => {
-  const [csvData, setCvsData] = useState<IItem[]>([]);
+  const [csvData, setCvsData] = useState<ItemProps[]>([]);
 
   useEffect(() => {
     getData().then((data) => {

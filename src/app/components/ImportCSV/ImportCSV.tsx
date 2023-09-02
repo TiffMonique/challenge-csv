@@ -1,7 +1,8 @@
-'use client'
 import React, { useState } from "react";
 import postData from "@/app/api/endpoints/export/postItem";
 import { showError, showSuccess } from "@/app/hooks/useNotifications";
+import { CsvHeaderProps } from "@/app/interfaces";
+import { downloadCSV, parseCSVLine, readFileAsText, validateCSVFormat } from "@/app/utils";
 
 function ImportCSV() {
   const [file, setFile] = useState();
@@ -9,28 +10,25 @@ function ImportCSV() {
   const handleOnChange = (e: any) => {
     setFile(e.target.files[0]);
   };
-  const validateCSVFormat = (csvString: any) => {
-    const lines = csvString.split("\n");
-    const expectedHeaders = ["name", "phone", "email"];
 
-    const lineMatchesHeaders = (line: string) => {
-      const normalizedLine = line.toLowerCase();
-      return expectedHeaders.every((header) => normalizedLine.includes(header));
-    };
-
-    let hasHeaders = false;
-    if (lines.length > 0 && lineMatchesHeaders(lines[0])) {
-      hasHeaders = true;
+  const headers: CsvHeaderProps[] = [
+    {
+      label: 'Name',
+      key: 'name'
+    },
+    {
+      label: 'Phone',
+      key: 'phone'
+    },
+    {
+      label: 'Email',
+      key: 'email'
+    },
+    {
+      label: 'Observations',
+      key: 'observations'
     }
-
-    return { lines, hasHeaders };
-  };
-
-  const parseCSVLine = (line: any) => {
-    const [name, phone, email] = line.split(",").map((field: string) => field.replace(/"/g, ''));
-    return { name, phone, email: email?.replace(/\r/g, '') };
-  };
-
+  ]
   const handleOnSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -38,32 +36,41 @@ function ImportCSV() {
     try {
       const csvString = await readFileAsText(file);
       const { lines, hasHeaders } = validateCSVFormat(csvString);
+
       let countSuccess = 0;
       let countErrors = 0;
       let countMissingFields = 0;
+      let csvRows = [];
+
       for (const line of lines.slice(hasHeaders ? 1 : 0)) {
         const { name, phone, email } = parseCSVLine(line);
         if (name && phone && email) {
           const data = { name, phone, email };
           const res = await postData(data);
+
           if (res.message) {
             countSuccess++;
-            console.log(res.messagem, 'resmensaej');
+            csvRows.push({ ...data, observations: res.message });
           } else {
             countErrors++;
+            csvRows.push({ ...data, observations: res.error });
           }
         } else {
           countMissingFields++;
+          csvRows.push({ name, phone, email, observations: 'Missing Fields' });
         }
       }
 
       if (countErrors > 0) {
         showError("Error sending data");
+        downloadCSV(csvRows, headers);
       }
       if (countMissingFields === 1 && countErrors === 0) {
         showError("One line is empty. Please check your CSV file.");
+        downloadCSV(csvRows, headers);
       } else if (countMissingFields > 1) {
         showError("Some lines are missing fields. Please check your CSV file.");
+        downloadCSV(csvRows, headers);
       }
       if (countSuccess > 0 && countErrors === 0 && countMissingFields === 0) {
         showSuccess("CSV uploaded successfully");
@@ -72,23 +79,6 @@ function ImportCSV() {
       console.error("Error:", error);
     }
   };
-
-
-  const readFileAsText = (file: any): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.onload = (event) => {
-        const csvOutput = event.target?.result;
-        const csvString = String(csvOutput);
-        resolve(csvString);
-      };
-      fileReader.onerror = (event) => {
-        reject(event.target?.error);
-      };
-      fileReader.readAsText(file);
-    });
-  };
-
 
   return (
     <div>

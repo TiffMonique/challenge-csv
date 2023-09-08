@@ -1,4 +1,4 @@
-import { IItem } from "@/app/interfaces/Item.interface";
+import { ItemProps } from "@/app/interfaces/Item.interface";
 import { API_ENDPOINT } from "../../base";
 
 async function getData() {
@@ -8,6 +8,6 @@ async function getData() {
     throw new Error('Failed to fetch data');
   }
   const data = await res.json();
-  return data.items as IItem[];
+  return data.items as ItemProps[];
 }
 export default getData;

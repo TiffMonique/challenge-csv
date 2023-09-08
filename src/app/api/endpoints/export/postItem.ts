@@ -1,7 +1,7 @@
-import { IItem } from "@/app/interfaces/Item.interface";
+import { ItemProps } from "@/app/interfaces/Item.interface";
 import { API_ENDPOINT } from "../../base";
 
-async function postData(data: IItem) {
+async function postData(data: ItemProps) {
   try {
     const res = await fetch(API_ENDPOINT, {
       method: 'POST',

@@ -1,6 +1,6 @@
 # EasyConnect - Simplifying CSV Import and Export
 
-![EasyConnect Logo](logo.png)
+![EasyConnect HomePage](contactlistpage.png)
 
 ## Description
 

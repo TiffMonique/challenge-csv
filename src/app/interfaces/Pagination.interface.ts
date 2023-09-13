@@ -2,11 +2,9 @@ import { ItemProps } from ".";
 
 export interface PaginationProps {
   data: ItemProps[];
+  onPageChange: (page: number) => void;
+  totalCount: number;
+  siblingCount?: number; // number of siblings to show on each side of the current page
   currentPage: number;
-  contactsPerPage: number;
-  indexOfFirstContact : number;
-  indexOfLastContact: number;
-  paginate: (pageNumber: number) => void;
-  goToPreviousPage: () => void;
-  goToNextPage: () => void;
+  pageSize: number;
 }

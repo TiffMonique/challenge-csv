@@ -10,7 +10,7 @@ interface TableProps {
 
 const Table = ({ data }: TableProps) => {
   return (
-    <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto xs:pt-20 sm:pt-40">
+    <div className="w-full xl:w-8/12 xl:mb-0 px-4 mx-auto xs:pt-20 sm:pt-40">
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
         {data.length === 0 ? (
           <div className="flex flex-col items-center justify-center">

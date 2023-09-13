@@ -31,6 +31,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: '#5100ff',
+        secondary: '#3333cc',
         black: {
           500: "#4F5665",
           600: "#0B132A",

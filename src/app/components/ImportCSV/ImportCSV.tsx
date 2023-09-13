@@ -7,6 +7,7 @@ import { downloadCSV, parseCSVLine, readFileAsText, validateCSVFormat } from "@/
 import { Modal } from "..";
 import Loading from "../Loading/Loading";
 import Button from "../Button/Button";
+import { BiImport } from "react-icons/bi";
 
 function ImportCSV() {
   const [file, setFile] = useState();
@@ -85,8 +86,6 @@ function ImportCSV() {
           csvRows.push({ name, phone, email, observations: 'Empty fields found' });
         }
       }
-
-
       const sum = countErrors + countMissingFields;
       setInsertedCount(countSuccess);
       setErrorCount(sum);
@@ -101,6 +100,7 @@ function ImportCSV() {
       console.error("Error:", error);
     } finally {
       setIsLoading(false);
+      setSelectedFile("Please select a .csv file");
     }
   };
 
@@ -113,9 +113,9 @@ function ImportCSV() {
 
   return (
     <>
-      <form className="w-full flex">
+      <form className="w-full flex lg:flex-row flex-col xs:gap-3 lg:gap-0">
         <div
-          className={`flex flex-row items-center rounded mr-4 border border-bg-primary ${animation ? "animate-wiggle" : ""}`}
+          className={`flex flex-row items-center w-full rounded lg:mr-4 border border-bg-primary  ${animation ? "animate-wiggle" : ""}`}
         >
           <input
             type="file"
@@ -127,13 +127,14 @@ function ImportCSV() {
           />
           <label
             htmlFor="custom-input"
-            className={`block mr-4 py-3 px-4 rounded border-0 text-lg font-semibold bg-primary text-white-500 cursor-pointer`}
+            className={`mr-4 py-4 lg:h-full justify-center items-center lg:flex xs:block px-4 rounded border-0 text-xs md:text-base xl:text-lg font-medium bg-primary hover:bg-secondary text-white-500 cursor-pointer`}
           >
             Choose file
           </label>
           <label className={`text-sm mr-4  ${animation ? "text-primary" : "text-slate-500"}`}>{selectedFile}</label>
         </div>
-        <Button onClick={handleOnSubmit}>
+        <Button onClick={handleOnSubmit} addClass="xs:w-full">
+          <BiImport className="inline-block mr-2" />
           Import
         </Button>
       </form >
@@ -163,7 +164,7 @@ function ImportCSV() {
           </button>
           <button
             type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            className="text-white-300 bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
             onClick={handleDownloadErrors}
           >
             Yes

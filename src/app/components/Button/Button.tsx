@@ -5,7 +5,7 @@ const Button = ({ children, addClass, onClick }: ButtonProps) => {
   return (
     <button
       className={
-        "py-3 lg:py-4 px-12 lg:px-16 text-white-500 font-semibold rounded bg-primary hover:shadow-purple transition-all outline-none" +
+        "flex justify-center items-center py-3 xl:py-4 px-8 xl:px-10 text-white-500 font-medium rounded bg-primary hover:shadow-purple hover:bg-secondary transition-all outline-none" +
         addClass
       }
       onClick={onClick}>

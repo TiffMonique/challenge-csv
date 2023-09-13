@@ -8,7 +8,8 @@ interface PromiseMessages {
 
 export const showMessage = (message: string, body: ToastOptions = {}) => { 
   return toast(message, {
-    ...body
+    ...body,
+    position: toast.POSITION.BOTTOM_RIGHT,
   });
 }
 
@@ -18,12 +19,14 @@ export const showPromise = (promise: any, messages: PromiseMessages) => {
 
 export const showSuccess = (message: string, body: ToastOptions = {}) => { 
   return toast.success(message, {
-    ...body
+    ...body,
+    position: toast.POSITION.BOTTOM_RIGHT,
   });
 }
 export const showError = (message: string, body: ToastOptions = {}) => { 
   return toast.error(message, {
-    ...body
+    ...body,
+    position: toast.POSITION.BOTTOM_RIGHT,
   });
 }
 export const showLoading = (message: string) => {

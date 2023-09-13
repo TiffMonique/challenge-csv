@@ -1,7 +1,13 @@
 # EasyConnect - Simplifying CSV Import and Export
 
-<img src="homepage.png" alt="EasyConnect HomePage" width="300" height="auto" style="border-radius: 10px;">
-<img src="contactlistpage.png" alt="EasyConnect Contact List Page" width="300" height="auto" style="border-radius: 10px;">
+<p align="center">
+  <img src="homepage.png" alt="EasyConnect HomePage" width="80%" style="border-radius: 10px;">
+</p>
+
+<p align="center">
+  <img src="contactlistpage.png" alt="EasyConnect Contact List Page" width="80%" style="border-radius: 10px;">
+</p>
+
 
 
 ## Description

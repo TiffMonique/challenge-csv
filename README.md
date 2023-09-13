@@ -19,10 +19,6 @@ EasyConnect is a platform designed to streamline the process of importing and ex
 - Quickly and easily import CSV files.
 - Efficiently export your contact data to CSV files.
 - Intuitively manage and organize your contacts.
-- Perform advanced searching and filtering to find the information you need.
-- Customize contact fields and attributes to suit your needs.
-- Maintain a history of changes for precise tracking.
-- Compatible with multiple CSV formats and operating systems.
 - And much more!
 
 ## Installation

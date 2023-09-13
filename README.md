@@ -26,7 +26,7 @@ To get started with EasyConnect, follow these steps:
 1. Clone the repository from GitHub:
 
    ```bash
-   git clone https://github.com/your-username/easyconnect.git
+   git clone https://github.com/TiffMonique/challenge-csv.git
    ```
 
 2. Navigate to the project directory:
